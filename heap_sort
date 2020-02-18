@@ -1,0 +1,66 @@
+#include<stdio.h>
+void max_heap(int arr[],int i,int n)
+{
+	int l,r,max,a[20],*o;
+	l=2*i;
+	r=2*i+1;
+	if(l<=n && arr[l]>arr[i])
+	{
+		max=l;
+	}
+	else
+		max=i;
+	if(r<=n && arr[r]>arr[i] && arr[r]>arr[l])
+		max=r;
+	printf("\narr[%d] :  %d arr[%d] : %d max : %d\n",l,arr[l],i,arr[i],max);
+	if(max!=i)
+	{
+		arr[max]=arr[max]+arr[i]-(arr[i]=arr[max]);
+		max_heap(arr,max,n);
+	}
+	//return arr;
+	return;
+}
+int* build_heap(int arr[],int n)
+{
+	int i,*c;
+	//c=arr;
+	for(i=n/2;i>=1;i--)
+	{
+			max_heap(arr,i,n);
+		//	printf("max heapify %d",i);
+		}
+	return arr;
+}
+void heap_sort(int a[],int n)
+{
+	int i,len,*arr;
+	arr=a;
+	int j;
+	len=n;
+	for(i=len;i>=2;i--)
+	{	printf("\nValue of i is : %d ",i);
+		arr=build_heap(arr,n);
+		printf("\nMax heap is ");
+		for(j=1; j<=n; j++)
+		printf(" arr[%d]=%d",j,arr[j]);
+		arr[1]=arr[1]+arr[n]-(arr[n]=arr[1]);
+		printf("\nAfter swapping the first and last element we get ");
+		for(j=1;j<=n;j++)
+			printf(" arr[%d]=%d",j,arr[j]);
+		n--;
+		printf("\n%d",n);
+	}
+	printf("Sorted list\n");
+	for(i=1;i<=len;i++)
+		printf("%d ",arr[i]);
+}
+void main()
+{
+	int arr[20],n,i;
+	printf("\nEnter length of list ");
+	scanf("%d",&n);
+	for(i=1;i<=n;i++)
+		scanf("%d",&arr[i]);
+	heap_sort(arr,n);
+}
