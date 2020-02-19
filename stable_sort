@@ -1,0 +1,34 @@
+#include<stdio.h>
+int* stable(int arr[],int l,int h,int n)
+{
+	int a[h+1],k=1,i,j;
+	for(i=l;i<=h+1;i++)
+		a[i]=0;
+	for(i=1;i<=n;i++)
+	{
+		j=arr[i];
+		a[j]++;
+	}
+	for(i=l;i<=h+1;i++)
+	{	for(j=0;j<a[i];j++)
+		{	arr[k]=i;
+			k++;
+		}
+	}
+		return arr;
+}
+void main()
+{
+	int arr[20],l,h,n,i,*b;
+	printf("Enter the no elements you want to sort ");
+	scanf("%d",&n);
+	printf("Enter the range of elements ");
+	scanf("%d %d",&l,&h);
+	printf("Enter the array elements ");
+	for(i=1;i<=n;i++)
+		scanf("%d",&arr[i]);
+	b=stable(arr,l,h,n);
+	printf("\nSorted list ");
+	for(i=1;i<=n;i++)
+		printf("%d ",b[i]);
+}
